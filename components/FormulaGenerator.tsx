@@ -196,7 +196,7 @@ export function FormulaGenerator() {
         </div>
 
         {/* Input Section */}
-        <div style={{ padding: "var(--space-2xl)" }} className="space-y-xl">
+        <div className="mobile-safe-padding space-y-xl">
           <div className="space-y-md">
             <div
               style={{
@@ -400,7 +400,7 @@ export function FormulaGenerator() {
               </button>
             </div>
 
-            <div style={{ padding: "var(--space-2xl)" }}>
+            <div className="mobile-safe-padding space-y-xl">
               <div
                 className="card"
                 style={{
@@ -419,10 +419,7 @@ export function FormulaGenerator() {
           </div>
 
           {/* Explanation */}
-          <div
-            className="card accent-bar"
-            style={{ padding: "var(--space-2xl)" }}
-          >
+          <div className="card accent-bar mobile-safe-padding space-y-xl">
             <div
               style={{
                 fontSize: "12px",
@@ -447,7 +444,7 @@ export function FormulaGenerator() {
           </div>
 
           {/* Breakdown */}
-          <div className="card" style={{ padding: "var(--space-2xl)" }}>
+          <div className="card mobile-safe-padding space-y-xl">
             <div
               style={{
                 fontSize: "12px",
@@ -490,9 +487,8 @@ export function FormulaGenerator() {
 
           {/* Example */}
           <div
-            className="card"
+            className="card mobile-safe-padding space-y-xl"
             style={{
-              padding: "var(--space-2xl)",
               background: "var(--green-subtle)",
             }}
           >
@@ -521,7 +517,7 @@ export function FormulaGenerator() {
 
           {/* Alternatives */}
           {result.alternatives && result.alternatives.length > 0 && (
-            <div className="card" style={{ padding: "var(--space-2xl)" }}>
+            <div className="card mobile-safe-padding space-y-xl">
               <div
                 style={{
                   fontSize: "12px",

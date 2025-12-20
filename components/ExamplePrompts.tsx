@@ -90,7 +90,7 @@ export function ExamplePrompts() {
       style={{ animationDelay: "100ms" }}
     >
       {/* Header Card */}
-      <div className="card" style={{ padding: "var(--space-2xl)" }}>
+      <div className="card mobile-safe-padding">
         <div
           style={{
             display: "flex",
@@ -227,7 +227,7 @@ export function ExamplePrompts() {
       <div
         className="card"
         style={{
-          padding: "var(--space-xl)",
+          padding: "var(--space-lg)",
           background: "var(--green-subtle)",
         }}
       >
@@ -282,7 +282,7 @@ export function ExamplePrompts() {
       {/* Stats Card - Desktop Only */}
       <div
         className="card hidden lg:block"
-        style={{ padding: "var(--space-xl)" }}
+        style={{ padding: "var(--space-lg)" }}
       >
         <div style={{ textAlign: "center" }}>
           <div

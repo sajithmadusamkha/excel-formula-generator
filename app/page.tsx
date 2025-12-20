@@ -16,6 +16,9 @@ export default function Home() {
         minHeight: "100vh",
         background: "var(--white)",
         overflow: "hidden",
+        width: "100%",
+        maxWidth: "100vw",
+        boxSizing: "border-box",
       }}
     >
       {/* Header - Sticky & Clean */}
@@ -127,7 +130,7 @@ export default function Home() {
                 lineHeight: 1.2,
                 marginBottom: "var(--space-xl)",
                 letterSpacing: "-0.02em",
-                padding: "0 var(--space-md)",
+                padding: "0 clamp(var(--space-xs), 2vw, var(--space-md)",
               }}
             >
               Generate Excel Formulas
