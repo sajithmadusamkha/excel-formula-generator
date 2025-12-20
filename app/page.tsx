@@ -1,218 +1,521 @@
-// app/page.tsx
+// app/page.tsx - Fixed Mobile Responsive
 import { FormulaGenerator } from "@/components/FormulaGenerator";
 import { ExamplePrompts } from "@/components/ExamplePrompts";
-import { Sparkles, Zap, Shield, Heart } from "lucide-react";
+import {
+  Sparkles,
+  Zap,
+  TrendingUp,
+  Shield,
+  FileSpreadsheet,
+} from "lucide-react";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-white">
-      {/* Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-lg bg-white/80 border-b border-gray-200 shadow-soft">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl flex items-center justify-center shadow-medium">
-                <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "var(--white)",
+        overflow: "hidden",
+      }}
+    >
+      {/* Header - Sticky & Clean */}
+      <header
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 50,
+          height: "72px",
+          background: "rgba(255, 255, 255, 0.8)",
+          backdropFilter: "blur(12px)",
+          borderBottom: "1px solid var(--gray-200)",
+        }}
+      >
+        <div className="container">
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "var(--space-lg) 0",
+              gap: "var(--space-md)",
+            }}
+          >
+            {/* Logo */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "var(--space-md)",
+                minWidth: 0,
+                flex: 1,
+              }}
+            >
+              <div
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  background: "var(--green)",
+                  borderRadius: "var(--radius-md)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                }}
+              >
+                <FileSpreadsheet
+                  style={{ width: "20px", height: "20px", color: "white" }}
+                />
               </div>
-              <div>
-                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                  Excel Formula Generator
-                </h1>
-                <p className="text-xs sm:text-sm text-gray-600 mt-0.5">
-                  AI-powered formulas in seconds ⚡
-                </p>
+              <div style={{ minWidth: 0 }}>
+                <div
+                  style={{
+                    fontWeight: 700,
+                    fontSize: "16px",
+                    lineHeight: 1.2,
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                >
+                  Formula Generator
+                </div>
+                <div style={{ fontSize: "11px", color: "var(--gray-600)" }}>
+                  AI-Powered
+                </div>
               </div>
             </div>
-            <div className="flex flex-wrap gap-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-100 text-green-800 text-xs font-semibold rounded-full shadow-soft">
-                <Shield className="w-3 h-3" />
-                100% Free
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full shadow-soft">
-                <Zap className="w-3 h-3" />
-                No Signup
-              </span>
+
+            {/* Badge */}
+            <div className="badge badge-green" style={{ flexShrink: 0 }}>
+              <Sparkles style={{ width: "12px", height: "12px" }} />
+              Free
             </div>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-          {/* Left Sidebar - Examples (Hidden on mobile, shown as dropdown) */}
-          <aside className="hidden lg:block lg:col-span-4 xl:col-span-3">
-            <div className="sticky top-24 space-y-6">
-              <ExamplePrompts />
-            </div>
-          </aside>
+      {/* Hero Section */}
+      <section
+        style={{
+          padding: "var(--space-4xl) 0 var(--space-5xl)",
+          background:
+            "linear-gradient(to bottom, var(--white), var(--gray-50))",
+        }}
+      >
+        <div className="container">
+          <div
+            style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}
+          >
+            {/* Accent */}
+            <div
+              className="animate-fadeIn"
+              style={{
+                width: "60px",
+                height: "4px",
+                background: "var(--green)",
+                borderRadius: "var(--radius-full)",
+                margin: "0 auto var(--space-2xl)",
+              }}
+            />
 
-          {/* Main Column - Formula Generator */}
-          <div className="lg:col-span-8 xl:col-span-9">
-            {/* Mobile Example Prompts */}
-            <div className="lg:hidden mb-6">
-              <ExamplePrompts />
-            </div>
+            {/* Heading */}
+            <h1
+              className="animate-fadeInUp"
+              style={{
+                fontSize: "clamp(28px, 8vw, 48px)",
+                fontWeight: 700,
+                lineHeight: 1.2,
+                marginBottom: "var(--space-xl)",
+                letterSpacing: "-0.02em",
+                padding: "0 var(--space-md)",
+              }}
+            >
+              Generate Excel Formulas
+              <br />
+              <span style={{ color: "var(--green)" }}>Instantly with AI</span>
+            </h1>
 
-            {/* Formula Generator */}
-            <FormulaGenerator />
+            {/* Subheading */}
+            <p
+              className="animate-fadeInUp"
+              style={{
+                fontSize: "clamp(15px, 3vw, 17px)",
+                lineHeight: 1.7,
+                color: "var(--gray-600)",
+                maxWidth: "600px",
+                margin: "0 auto var(--space-3xl)",
+                animationDelay: "100ms",
+                padding: "0 var(--space-md)",
+              }}
+            >
+              Describe what you want in plain English and get perfect formulas
+              with detailed explanations. No signup required.
+            </p>
+
+            {/* Stats */}
+            <div
+              className="animate-fadeInUp"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
+                gap: "var(--space-lg)",
+                maxWidth: "600px",
+                margin: "0 auto",
+                animationDelay: "200ms",
+                padding: "0 var(--space-md)",
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    fontSize: "clamp(24px, 6vw, 32px)",
+                    fontWeight: 700,
+                    color: "var(--green)",
+                    marginBottom: "var(--space-xs)",
+                  }}
+                >
+                  25
+                </div>
+                <div
+                  style={{
+                    fontSize: "clamp(10px, 2vw, 12px)",
+                    color: "var(--gray-600)",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.05em",
+                    fontWeight: 600,
+                  }}
+                >
+                  Free Daily
+                </div>
+              </div>
+              <div>
+                <div
+                  style={{
+                    fontSize: "clamp(24px, 6vw, 32px)",
+                    fontWeight: 700,
+                    color: "var(--green)",
+                    marginBottom: "var(--space-xs)",
+                  }}
+                >
+                  2s
+                </div>
+                <div
+                  style={{
+                    fontSize: "clamp(10px, 2vw, 12px)",
+                    color: "var(--gray-600)",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.05em",
+                    fontWeight: 600,
+                  }}
+                >
+                  Avg Time
+                </div>
+              </div>
+              <div>
+                <div
+                  style={{
+                    fontSize: "clamp(24px, 6vw, 32px)",
+                    fontWeight: 700,
+                    color: "var(--green)",
+                    marginBottom: "var(--space-xs)",
+                  }}
+                >
+                  ∞
+                </div>
+                <div
+                  style={{
+                    fontSize: "clamp(10px, 2vw, 12px)",
+                    color: "var(--gray-600)",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.05em",
+                    fontWeight: 600,
+                  }}
+                >
+                  Free Forever
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* How It Works Section */}
-        <section className="mt-12 sm:mt-16 lg:mt-20 animate-fade-in">
-          <div className="bg-white rounded-3xl shadow-large p-6 sm:p-8 lg:p-12 border-2 border-gray-100">
-            <div className="text-center mb-8 sm:mb-12">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
+      {/* Main Content - Perfect Grid */}
+      <main style={{ padding: "var(--space-3xl) 0 var(--space-5xl)" }}>
+        <div className="container">
+          <div className="main-grid">
+            <FormulaGenerator />
+            <ExamplePrompts />
+          </div>
+        </div>
+      </main>
+
+      {/* How It Works */}
+      <section
+        style={{
+          padding: "var(--space-4xl) 0",
+          background: "var(--gray-50)",
+          borderTop: "1px solid var(--gray-200)",
+        }}
+      >
+        <div className="container">
+          <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
+            {/* Section Header */}
+            <div
+              style={{ textAlign: "center", marginBottom: "var(--space-4xl)" }}
+            >
+              <div
+                style={{
+                  width: "60px",
+                  height: "4px",
+                  background: "var(--green)",
+                  borderRadius: "var(--radius-full)",
+                  margin: "0 auto var(--space-xl)",
+                }}
+              />
+              <h2
+                style={{
+                  fontSize: "clamp(24px, 5vw, 32px)",
+                  fontWeight: 700,
+                  marginBottom: "var(--space-md)",
+                }}
+              >
                 How It Works
               </h2>
-              <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
-                Generate Excel and Google Sheets formulas in three simple steps
+              <p
+                style={{
+                  fontSize: "clamp(14px, 3vw, 16px)",
+                  color: "var(--gray-600)",
+                }}
+              >
+                Generate perfect formulas in four simple steps
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-              {/* Step 1 */}
-              <div className="text-center group">
-                <div className="relative mb-6">
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl flex items-center justify-center mx-auto shadow-soft group-hover:shadow-medium transition-all duration-300 group-hover:scale-110">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center shadow-soft">
-                      <span className="text-2xl sm:text-3xl font-bold text-white">
-                        1
-                      </span>
-                    </div>
+            {/* Steps Grid */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns:
+                  "repeat(auto-fit, minmax(min(100%, 240px), 1fr))",
+                gap: "var(--space-xl)",
+              }}
+            >
+              {[
+                {
+                  num: "1",
+                  title: "Describe",
+                  desc: "Type what you want in plain English. No technical knowledge needed.",
+                },
+                {
+                  num: "2",
+                  title: "Generate",
+                  desc: "AI analyzes your request and creates the perfect formula instantly.",
+                },
+                {
+                  num: "3",
+                  title: "Copy",
+                  desc: "Copy the formula with one click and paste into your spreadsheet.",
+                },
+                {
+                  num: "4",
+                  title: "Learn",
+                  desc: "Get detailed explanations and step-by-step breakdowns.",
+                },
+              ].map((step, i) => (
+                <div
+                  key={i}
+                  className="card card-hover"
+                  style={{ padding: "var(--space-xl)", textAlign: "center" }}
+                >
+                  <div
+                    style={{
+                      width: "48px",
+                      height: "48px",
+                      background: "var(--green)",
+                      color: "white",
+                      borderRadius: "var(--radius-md)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "20px",
+                      fontWeight: 700,
+                      margin: "0 auto var(--space-lg)",
+                    }}
+                  >
+                    {step.num}
                   </div>
-                  <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-purple-300 to-transparent"></div>
+                  <h3
+                    style={{
+                      fontWeight: 600,
+                      fontSize: "16px",
+                      marginBottom: "var(--space-sm)",
+                    }}
+                  >
+                    {step.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: "14px",
+                      color: "var(--gray-600)",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {step.desc}
+                  </p>
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold mb-3 text-gray-900">
-                  Describe Your Task
-                </h3>
-                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  Tell us what you want to do in plain English. No formula
-                  knowledge needed!
-                </p>
-              </div>
-
-              {/* Step 2 */}
-              <div className="text-center group">
-                <div className="relative mb-6">
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl flex items-center justify-center mx-auto shadow-soft group-hover:shadow-medium transition-all duration-300 group-hover:scale-110">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center shadow-soft">
-                      <span className="text-2xl sm:text-3xl font-bold text-white">
-                        2
-                      </span>
-                    </div>
-                  </div>
-                  <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-green-300 to-transparent"></div>
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold mb-3 text-gray-900">
-                  AI Creates Formula
-                </h3>
-                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  Our AI generates the perfect formula and explains every step
-                  clearly.
-                </p>
-              </div>
-
-              {/* Step 3 */}
-              <div className="text-center group">
-                <div className="relative mb-6">
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-amber-100 to-orange-100 rounded-2xl flex items-center justify-center mx-auto shadow-soft group-hover:shadow-medium transition-all duration-300 group-hover:scale-110">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl flex items-center justify-center shadow-soft">
-                      <span className="text-2xl sm:text-3xl font-bold text-white">
-                        3
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold mb-3 text-gray-900">
-                  Copy & Learn
-                </h3>
-                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  Copy to your spreadsheet and understand how it works with our
-                  explanation.
-                </p>
-              </div>
+              ))}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Features Grid */}
-        <section className="mt-12 sm:mt-16 animate-fade-in">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-soft hover:shadow-medium transition-all duration-300 border-2 border-gray-100 card-hover">
-              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
-                <Sparkles className="w-6 h-6 text-purple-600" />
-              </div>
-              <h3 className="font-bold text-base sm:text-lg mb-2 text-gray-900">
-                AI-Powered
-              </h3>
-              <p className="text-sm text-gray-600">
-                Advanced AI generates accurate formulas instantly
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-soft hover:shadow-medium transition-all duration-300 border-2 border-gray-100 card-hover">
-              <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
-                <Zap className="w-6 h-6 text-green-600" />
-              </div>
-              <h3 className="font-bold text-base sm:text-lg mb-2 text-gray-900">
-                Lightning Fast
-              </h3>
-              <p className="text-sm text-gray-600">
-                Get your formula in seconds, not minutes
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-soft hover:shadow-medium transition-all duration-300 border-2 border-gray-100 card-hover">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                <Shield className="w-6 h-6 text-blue-600" />
-              </div>
-              <h3 className="font-bold text-base sm:text-lg mb-2 text-gray-900">
-                Always Free
-              </h3>
-              <p className="text-sm text-gray-600">
-                25 formulas per day, forever free
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-soft hover:shadow-medium transition-all duration-300 border-2 border-gray-100 card-hover">
-              <div className="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center mb-4">
-                <Heart className="w-6 h-6 text-pink-600" />
-              </div>
-              <h3 className="font-bold text-base sm:text-lg mb-2 text-gray-900">
-                Learn & Grow
-              </h3>
-              <p className="text-sm text-gray-600">
-                Understand formulas with detailed explanations
-              </p>
+      {/* Features */}
+      <section style={{ padding: "var(--space-4xl) 0" }}>
+        <div className="container">
+          <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns:
+                  "repeat(auto-fit, minmax(min(100%, 240px), 1fr))",
+                gap: "var(--space-lg)",
+              }}
+            >
+              {[
+                {
+                  icon: Zap,
+                  title: "AI-Powered",
+                  desc: "Advanced AI generates accurate formulas instantly",
+                },
+                {
+                  icon: TrendingUp,
+                  title: "Learn & Grow",
+                  desc: "Detailed explanations help you understand",
+                },
+                {
+                  icon: Sparkles,
+                  title: "Always Free",
+                  desc: "25 free requests daily, no signup needed",
+                },
+                {
+                  icon: Shield,
+                  title: "Both Platforms",
+                  desc: "Works with Excel and Google Sheets",
+                },
+              ].map((feature, i) => {
+                const Icon = feature.icon;
+                return (
+                  <div
+                    key={i}
+                    className="card card-hover"
+                    style={{ padding: "var(--space-xl)" }}
+                  >
+                    <Icon
+                      style={{
+                        width: "24px",
+                        height: "24px",
+                        color: "var(--green)",
+                        marginBottom: "var(--space-md)",
+                      }}
+                    />
+                    <h3
+                      style={{
+                        fontWeight: 600,
+                        fontSize: "15px",
+                        marginBottom: "var(--space-xs)",
+                      }}
+                    >
+                      {feature.title}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: "13px",
+                        color: "var(--gray-600)",
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      {feature.desc}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
 
       {/* Footer */}
-      <footer className="border-t-2 border-gray-200 bg-white/50 backdrop-blur-sm mt-16 sm:mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-white" />
+      <footer
+        style={{
+          borderTop: "1px solid var(--gray-200)",
+          padding: "var(--space-2xl) 0",
+          background: "var(--gray-50)",
+        }}
+      >
+        <div className="container">
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              gap: "var(--space-lg)",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "var(--space-md)",
+                minWidth: 0,
+              }}
+            >
+              <div
+                style={{
+                  width: "32px",
+                  height: "32px",
+                  background: "var(--green)",
+                  borderRadius: "var(--radius-md)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                }}
+              >
+                <FileSpreadsheet
+                  style={{ width: "16px", height: "16px", color: "white" }}
+                />
               </div>
-              <span className="text-lg font-bold text-gray-900">
-                Excel Formula Generator
-              </span>
+              <div style={{ minWidth: 0 }}>
+                <div
+                  style={{
+                    fontWeight: 600,
+                    fontSize: "14px",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                >
+                  Formula Generator
+                </div>
+                <div style={{ fontSize: "11px", color: "var(--gray-600)" }}>
+                  Powered by AI
+                </div>
+              </div>
             </div>
-            <p className="text-sm text-gray-600 mb-2">
-              © 2025 Excel Formula Generator. Free forever, no signup required.
-            </p>
-            <p className="text-xs text-gray-500">
-              Built with <Heart className="w-3 h-3 inline text-pink-500" />{" "}
-              using Next.js and Google Gemini AI
-            </p>
+            <div
+              style={{
+                fontSize: "13px",
+                color: "var(--gray-600)",
+                whiteSpace: "nowrap",
+              }}
+            >
+              © 2024 • Built with{" "}
+              <span style={{ color: "var(--green)" }}>♥</span>
+            </div>
           </div>
         </div>
       </footer>
-    </main>
+    </div>
   );
 }

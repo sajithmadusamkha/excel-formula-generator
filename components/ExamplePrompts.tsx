@@ -3,269 +3,308 @@
 
 import { useState } from "react";
 import {
-  Lightbulb,
   TrendingUp,
+  Calculator,
   Calendar,
+  Search,
+  DollarSign,
+  BarChart3,
   FileText,
-  Hash,
-  Shuffle,
+  Filter,
+  Lightbulb,
+  ArrowRight,
+  Sparkles,
 } from "lucide-react";
 
-const EXAMPLE_PROMPTS = [
+const examples = [
   {
-    text: "Calculate percentage increase between A1 and B1",
+    title: "Percentage Growth",
+    prompt: "Calculate percentage increase between A1 and B1",
     icon: TrendingUp,
-    category: "Math",
+    gradient: "from-emerald-500 to-teal-500",
   },
   {
-    text: "VLOOKUP to find employee name from ID",
-    icon: FileText,
-    category: "Lookup",
+    title: "Sum Values",
+    prompt: "Sum all values in column A from row 1 to 10",
+    icon: Calculator,
+    gradient: "from-blue-500 to-cyan-500",
   },
   {
-    text: 'Sum all values in column C where column A is "Sales"',
-    icon: Hash,
-    category: "Conditional",
+    title: "Conditional Logic",
+    prompt: "If A1 is greater than 100, show 'High', otherwise 'Low'",
+    icon: Filter,
+    gradient: "from-purple-500 to-pink-500",
   },
   {
-    text: "Get the current date and time",
+    title: "Date Calculation",
+    prompt: "Calculate number of days between two dates in A1 and B1",
     icon: Calendar,
-    category: "Date",
+    gradient: "from-orange-500 to-amber-500",
   },
   {
-    text: "Count unique values in a range",
-    icon: Hash,
-    category: "Count",
+    title: "VLOOKUP Search",
+    prompt: "Look up employee name from ID in A1 using data in D:E",
+    icon: Search,
+    gradient: "from-red-500 to-rose-500",
   },
   {
-    text: "Remove duplicate entries from a list",
-    icon: Shuffle,
-    category: "Data Cleanup",
+    title: "Currency Format",
+    prompt: "Convert number in A1 to currency format with 2 decimals",
+    icon: DollarSign,
+    gradient: "from-green-500 to-emerald-500",
   },
   {
-    text: "Calculate average excluding zeros",
-    icon: TrendingUp,
-    category: "Math",
+    title: "Average Values",
+    prompt: "Calculate average of values in range B2:B20, ignoring errors",
+    icon: BarChart3,
+    gradient: "from-indigo-500 to-blue-500",
   },
   {
-    text: "Combine first and last name with a space",
+    title: "Extract Text",
+    prompt: "Extract first name from full name in A1",
     icon: FileText,
-    category: "Text",
-  },
-  {
-    text: "Check if a cell contains specific text",
-    icon: FileText,
-    category: "Text",
-  },
-  {
-    text: "Rank values from highest to lowest",
-    icon: TrendingUp,
-    category: "Ranking",
+    gradient: "from-pink-500 to-fuchsia-500",
   },
 ];
 
 export function ExamplePrompts() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  const handleClick = (prompt: string) => {
-    // Dispatch custom event that FormulaGenerator can listen to
+  const handleSelect = (prompt: string) => {
     window.dispatchEvent(new CustomEvent("selectPrompt", { detail: prompt }));
 
-    // Add haptic feedback on mobile
     if ("vibrate" in navigator) {
-      navigator.vibrate(10);
+      navigator.vibrate(30);
+    }
+
+    if (window.innerWidth < 1024) {
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 100);
     }
   };
 
   return (
-    <div className="space-y-4 animate-slide-in-left">
-      {/* Header */}
-      <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-5 border-2 border-purple-100 shadow-soft">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center shadow-soft">
-            <Lightbulb className="w-5 h-5 text-white" />
+    <div
+      className="space-y-xl animate-fadeInUp"
+      style={{ animationDelay: "100ms" }}
+    >
+      {/* Header Card */}
+      <div className="card" style={{ padding: "var(--space-2xl)" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "var(--space-md)",
+            marginBottom: "var(--space-md)",
+          }}
+        >
+          <div
+            style={{
+              width: "40px",
+              height: "40px",
+              background: "var(--green)",
+              borderRadius: "var(--radius-md)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+            }}
+          >
+            <Lightbulb
+              style={{ width: "20px", height: "20px", color: "white" }}
+            />
           </div>
-          <h3 className="font-bold text-lg text-gray-900">Try Examples</h3>
+          <div>
+            <h2
+              style={{ fontWeight: 600, fontSize: "17px", marginBottom: "2px" }}
+            >
+              Quick Start
+            </h2>
+            <p style={{ fontSize: "13px", color: "var(--gray-600)" }}>
+              Click any example to begin
+            </p>
+          </div>
         </div>
-        <p className="text-sm text-gray-600">
-          Click any example to get started instantly
-        </p>
       </div>
 
-      {/* Example List */}
-      <div className="space-y-2">
-        {EXAMPLE_PROMPTS.map((item, i) => {
-          const Icon = item.icon;
+      {/* Examples List */}
+      <div className="space-y-sm">
+        {examples.map((example, index) => {
+          const Icon = example.icon;
+          const isHovered = hoveredIndex === index;
+
           return (
             <button
-              key={i}
-              onClick={() => handleClick(item.text)}
-              onMouseEnter={() => setHoveredIndex(i)}
+              key={index}
+              onClick={() => handleSelect(example.prompt)}
+              onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
-              className="w-full text-left p-4 bg-white hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 rounded-xl text-sm border-2 border-gray-100 hover:border-purple-200 transition-all duration-200 group card-hover shadow-soft"
+              className="card card-interactive"
               style={{
-                animationDelay: `${i * 50}ms`,
+                width: "100%",
+                textAlign: "left",
+                padding: "var(--space-lg)",
+                animationDelay: `${index * 40}ms`,
+                transition: "all var(--duration-normal) var(--ease-out)",
               }}
             >
-              <div className="flex items-start gap-3">
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "var(--space-md)",
+                }}
+              >
+                {/* Icon */}
                 <div
-                  className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 ${
-                    hoveredIndex === i
-                      ? "bg-gradient-to-br from-purple-500 to-blue-500 shadow-soft"
-                      : "bg-gray-100"
-                  }`}
+                  style={{
+                    width: "36px",
+                    height: "36px",
+                    borderRadius: "var(--radius-md)",
+                    background: isHovered ? "var(--green)" : "var(--gray-100)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                    transition: "all var(--duration-normal) var(--ease-out)",
+                  }}
                 >
                   <Icon
-                    className={`w-4 h-4 transition-colors duration-200 ${
-                      hoveredIndex === i ? "text-white" : "text-gray-600"
-                    }`}
+                    style={{
+                      width: "18px",
+                      height: "18px",
+                      color: isHovered ? "white" : "var(--gray-600)",
+                      transition: "color var(--duration-fast) var(--ease-out)",
+                    }}
                   />
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-gray-900 font-medium leading-snug group-hover:text-purple-700 transition-colors">
-                    {item.text}
+
+                {/* Content */}
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <h3
+                    style={{
+                      fontWeight: 600,
+                      fontSize: "14px",
+                      marginBottom: "2px",
+                      color: isHovered ? "var(--green)" : "var(--gray-900)",
+                      transition: "color var(--duration-fast) var(--ease-out)",
+                    }}
+                  >
+                    {example.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "var(--gray-600)",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {example.prompt}
                   </p>
-                  <span className="inline-block mt-1.5 px-2 py-0.5 bg-gray-100 group-hover:bg-purple-100 text-xs text-gray-600 group-hover:text-purple-700 rounded-full transition-colors">
-                    {item.category}
-                  </span>
                 </div>
-                <svg
-                  className={`flex-shrink-0 w-5 h-5 text-gray-400 group-hover:text-purple-500 transition-all duration-200 ${
-                    hoveredIndex === i ? "transform translate-x-1" : ""
-                  }`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
+
+                {/* Arrow */}
+                <ArrowRight
+                  style={{
+                    width: "16px",
+                    height: "16px",
+                    color: isHovered ? "var(--green)" : "var(--gray-400)",
+                    flexShrink: 0,
+                    transform: isHovered ? "translateX(4px)" : "translateX(0)",
+                    transition: "all var(--duration-normal) var(--ease-out)",
+                  }}
+                />
               </div>
             </button>
           );
         })}
       </div>
 
-      {/* Pro Tip Card */}
-      <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-4 border-2 border-amber-200 shadow-soft">
-        <div className="flex items-start gap-3">
-          <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-amber-400 to-orange-400 rounded-lg flex items-center justify-center shadow-soft">
-            <span className="text-lg">💡</span>
-          </div>
+      {/* Tips Card */}
+      <div
+        className="card"
+        style={{
+          padding: "var(--space-xl)",
+          background: "var(--green-subtle)",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            gap: "var(--space-md)",
+          }}
+        >
+          <Sparkles
+            style={{
+              width: "20px",
+              height: "20px",
+              color: "var(--green)",
+              flexShrink: 0,
+              marginTop: "2px",
+            }}
+          />
           <div>
-            <h4 className="font-semibold text-sm text-gray-900 mb-1">
-              Pro Tip
-            </h4>
-            <p className="text-xs text-gray-600 leading-relaxed">
-              Be specific about cell references (e.g., "A1", "B2:B10") for more
-              accurate formulas
-            </p>
+            <h3
+              style={{
+                fontWeight: 600,
+                fontSize: "14px",
+                marginBottom: "var(--space-sm)",
+                color: "var(--green-dark)",
+              }}
+            >
+              Pro Tips
+            </h3>
+            <ul
+              className="space-y-xs"
+              style={{ fontSize: "13px", color: "var(--gray-700)" }}
+            >
+              <li style={{ display: "flex", gap: "var(--space-xs)" }}>
+                <span className="accent-dot" style={{ marginTop: "7px" }} />
+                <span>Be specific about cell references</span>
+              </li>
+              <li style={{ display: "flex", gap: "var(--space-xs)" }}>
+                <span className="accent-dot" style={{ marginTop: "7px" }} />
+                <span>Mention your data types</span>
+              </li>
+              <li style={{ display: "flex", gap: "var(--space-xs)" }}>
+                <span className="accent-dot" style={{ marginTop: "7px" }} />
+                <span>Describe expected output clearly</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
 
-      {/* Features Card - Desktop Only */}
-      <div className="hidden lg:block bg-white rounded-2xl shadow-soft p-5 border-2 border-gray-100">
-        <h3 className="font-bold text-base mb-4 text-gray-900">
-          Why use our tool?
-        </h3>
-        <div className="space-y-3 text-sm">
-          <div className="flex items-start gap-3">
-            <div className="flex-shrink-0 w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
-              <svg
-                className="w-3 h-3 text-green-600"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
-            <span className="text-gray-700 leading-relaxed">
-              <strong className="text-gray-900">25 free requests</strong> per
-              day
-            </span>
+      {/* Stats Card - Desktop Only */}
+      <div
+        className="card hidden lg:block"
+        style={{ padding: "var(--space-xl)" }}
+      >
+        <div style={{ textAlign: "center" }}>
+          <div
+            style={{
+              fontSize: "32px",
+              fontWeight: 700,
+              color: "var(--green)",
+              marginBottom: "var(--space-xs)",
+            }}
+          >
+            25
           </div>
-          <div className="flex items-start gap-3">
-            <div className="flex-shrink-0 w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
-              <svg
-                className="w-3 h-3 text-green-600"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
-            <span className="text-gray-700 leading-relaxed">
-              Detailed <strong className="text-gray-900">explanations</strong>{" "}
-              included
-            </span>
-          </div>
-          <div className="flex items-start gap-3">
-            <div className="flex-shrink-0 w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
-              <svg
-                className="w-3 h-3 text-green-600"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
-            <span className="text-gray-700 leading-relaxed">
-              Works for both{" "}
-              <strong className="text-gray-900">Excel & Sheets</strong>
-            </span>
-          </div>
-          <div className="flex items-start gap-3">
-            <div className="flex-shrink-0 w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
-              <svg
-                className="w-3 h-3 text-green-600"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
-            <span className="text-gray-700 leading-relaxed">
-              <strong className="text-gray-900">Learn</strong> as you generate
-            </span>
-          </div>
-          <div className="flex items-start gap-3">
-            <div className="flex-shrink-0 w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
-              <svg
-                className="w-3 h-3 text-green-600"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
-            <span className="text-gray-700 leading-relaxed">
-              <strong className="text-gray-900">No signup</strong> required
-            </span>
+          <div
+            style={{
+              fontSize: "12px",
+              color: "var(--gray-600)",
+              textTransform: "uppercase",
+              letterSpacing: "0.05em",
+              fontWeight: 600,
+            }}
+          >
+            Free Daily Requests
           </div>
         </div>
       </div>
