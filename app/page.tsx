@@ -1,6 +1,7 @@
 // app/page.tsx - Fixed Mobile Responsive
 import { FormulaGenerator } from "@/components/FormulaGenerator";
 import { ExamplePrompts } from "@/components/ExamplePrompts";
+import { AdBanner } from "@/components/AdBanner";
 import {
   Sparkles,
   Zap,
@@ -27,7 +28,6 @@ export default function Home() {
           position: "sticky",
           top: 0,
           zIndex: 50,
-          height: "72px",
           background: "rgba(255, 255, 255, 0.8)",
           backdropFilter: "blur(12px)",
           borderBottom: "1px solid var(--gray-200)",
@@ -93,6 +93,14 @@ export default function Home() {
               <Sparkles style={{ width: "12px", height: "12px" }} />
               Free
             </div>
+          </div>
+
+          {/* Ad Banner */}
+          <div
+            className="ad-banner-container"
+            style={{ paddingBottom: "var(--space-md)" }}
+          >
+            <AdBanner />
           </div>
         </div>
       </header>

@@ -837,6 +837,36 @@ pre,
   word-break: break-all;
 }
 
+/* ============================================
+   AD BANNER - RESPONSIVE
+   ============================================ */
+
+.ad-banner-container {
+  display: block !important;
+}
+
+/* Desktop ad - show on screens >= 768px */
+.ad-desktop {
+  display: flex;
+}
+
+/* Mobile ad - hide on screens >= 768px */
+.ad-mobile {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  /* Desktop ad - hide on mobile */
+  .ad-desktop {
+    display: none !important;
+  }
+
+  /* Mobile ad - show on mobile */
+  .ad-mobile {
+    display: flex !important;
+  }
+}
+
 /* Main Content Grid */
 .main-grid {
   display: grid;
